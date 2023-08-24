@@ -1,0 +1,11 @@
+@use "src/styles/variables" as *;
+
+.searchbar {
+    border-width: 1px;
+    border-radius: $border-radius-smooth;
+
+    &:focus {
+        box-shadow: 0 0 2px 0px $colors-gray;
+        outline-style: none;
+    }
+}
