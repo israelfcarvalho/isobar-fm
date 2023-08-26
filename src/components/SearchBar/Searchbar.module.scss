@@ -1,11 +1,66 @@
 @use "src/styles/variables" as *;
 
-.searchbar {
-    border-width: 1px;
-    border-radius: $border-radius-smooth;
+.container {
+    position: relative;
+    max-width: 800px;
 
-    &:focus {
-        box-shadow: 0 0 2px 0px $colors-gray;
-        outline-style: none;
+    color: $colors-gray-light;
+
+    .searchbar {
+        width: 100%;
+        border: none;
+        padding: $spacing-tiny $spacing-medium $spacing-tiny $spacing-mini;
+
+        &:focus {
+            box-shadow: 0 0 2px 0px $colors-gray;
+            outline-style: none;
+        }
+
+        &--outlined {
+            border: 1px solid $colors-gray-light;
+            border-radius: $border-radius-smooth;
+        }
+
+        &--withContent {
+            padding-left: $spacing-large;
+        }
+    }
+
+    .iconClose {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+        left: $spacing-mini;
+        top: 0;
+
+        height: 100%;
+        padding: 0;
+        border: none;
+        background-color: inherit;
+        outline: none;
+
+        color: $colors-gray;
+        font-size: $font-size-medium;
+        cursor: pointer;
+
+        &:focus {
+            font-weight: 600;
+        }
+    }
+
+    .iconSearch {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        height: 100%;
+
+        pointer-events: none;
+
+        &--focused {
+            color: $colors-gray-dark;
+        }
     }
 }
