@@ -49,7 +49,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ label, placeholder, outlined = tr
                 onChange={handleChangeTerm}
             />
             {!!term && (
-                <button className={className(styles.iconClose)} type="button">
+                <button aria-label="Clear Search" className={className(styles.iconClose)} type="button">
                     <Icon icon="close" size="inherit" />
                 </button>
             )}

@@ -1,13 +1,13 @@
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <SearchBar label='Search band'/>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <header className="App-header">
+                <SearchBar label="Search band" onSearch={event => console.log(event)} />
+            </header>
+        </div>
+    )
 }
 
-export default App;
+export default App
