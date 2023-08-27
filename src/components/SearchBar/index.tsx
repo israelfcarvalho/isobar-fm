@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, FormEventHandler, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { className } from '../../utils/hooks/classname'
 import Icon from '../Icon'
 import styles from './Searchbar.module.scss'
@@ -7,11 +7,11 @@ interface SearchBarProps {
     label: string
     placeholder?: string
     outlined?: boolean
-    onSearch: FormEventHandler<HTMLFormElement>
+    onSearch: (term: string) => void
     initialTerm?: string
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ initialTerm, label, placeholder, outlined = true, onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ initialTerm = '', label, placeholder, outlined = true, onSearch }) => {
     const [focused, setFocused] = useState(false)
     const [term, setTerm] = useState(initialTerm)
 
@@ -27,14 +27,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialTerm, label, placeholder, 
         setFocused(false)
     }
 
-    const handleSearch = (event: FormEvent<HTMLFormElement>) => {
+    const search = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        onSearch(event)
+        onSearch(term)
+    }
+
+    const clearSearch = () => {
+        setTerm('')
     }
 
     return (
-        <form className={styles.container} onSubmit={handleSearch}>
+        <form className={styles.container} onSubmit={search}>
             <input
                 value={term}
                 aria-label={label}
@@ -50,7 +54,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialTerm, label, placeholder, 
                 onChange={handleChangeTerm}
             />
             {!!term && (
-                <button aria-label="Clear Search" className={className(styles.iconClose)} type="button">
+                <button
+                    aria-label="Clear Search"
+                    onClick={clearSearch}
+                    className={className(styles.iconClose)}
+                    type="button"
+                >
                     <Icon icon="close" size="inherit" />
                 </button>
             )}
