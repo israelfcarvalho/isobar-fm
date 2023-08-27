@@ -8,11 +8,12 @@ interface SearchBarProps {
     placeholder?: string
     outlined?: boolean
     onSearch: FormEventHandler<HTMLFormElement>
+    initialTerm?: string
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ label, placeholder, outlined = true, onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ initialTerm, label, placeholder, outlined = true, onSearch }) => {
     const [focused, setFocused] = useState(false)
-    const [term, setTerm] = useState('')
+    const [term, setTerm] = useState(initialTerm)
 
     const handleChangeTerm = (event: ChangeEvent<HTMLInputElement>) => {
         setTerm(event.target.value)
