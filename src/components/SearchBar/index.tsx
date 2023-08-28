@@ -54,18 +54,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialTerm = '', label, placehol
                 onChange={handleChangeTerm}
             />
             {!!term && (
-                <button
-                    aria-label="Clear Search"
-                    onClick={clearSearch}
+                <Icon
                     className={className(styles.iconClose)}
+                    icon="close"
                     type="button"
-                >
-                    <Icon icon="close" size="inherit" />
-                </button>
+                    buttonType="button"
+                    onClick={clearSearch}
+                    size="inherit"
+                    ariaLabel="Clear Search"
+                />
             )}
-            <span className={className(styles.iconSearch, focused && styles['iconSearch--focused'])}>
-                <Icon icon="search" />
-            </span>
+            <Icon
+                className={className(styles.iconSearch, focused && styles['iconSearch--focused'])}
+                icon="search"
+                type="presentational"
+            />
         </form>
     )
 }

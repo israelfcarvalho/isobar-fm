@@ -36,14 +36,9 @@
         top: 0;
 
         height: 100%;
-        padding: 0;
-        border: none;
-        background-color: inherit;
-        outline: none;
 
         color: $colors-gray;
         font-size: $font-size-medium;
-        cursor: pointer;
 
         &:focus {
             font-weight: 600;
