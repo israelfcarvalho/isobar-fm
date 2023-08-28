@@ -1,0 +1,7 @@
+@use "src/styles/variables";
+
+@function colorOpaque($color: "", $opacity: "") {
+    $full-color: #{$color}#{$opacity};
+
+    @return $full-color;
+}

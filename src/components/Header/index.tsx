@@ -1,5 +1,6 @@
 import Icon from '../Icon'
 import SearchBar from '../SearchBar'
+import styles from './Header.module.scss'
 
 const Header: React.FC = () => {
     const handleSearch = (search: string) => {
@@ -7,7 +8,7 @@ const Header: React.FC = () => {
     }
 
     return (
-        <header>
+        <header className={styles.header}>
             <Icon
                 icon="chevron_left"
                 type="button"
@@ -17,8 +18,10 @@ const Header: React.FC = () => {
                 }}
             />
 
-            <SearchBar label="Search Band" onSearch={handleSearch}></SearchBar>
-            <h1>isobar.fm</h1>
+            <SearchBar outlined={false} label="Search Band" onSearch={handleSearch}></SearchBar>
+            <h1 className={styles.logo}>
+                isobar<span>.fm</span>
+            </h1>
         </header>
     )
 }

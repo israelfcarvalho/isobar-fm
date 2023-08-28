@@ -1,5 +1,6 @@
-import './Icon.module.scss'
+import styles from './Icon.module.scss'
 import React, { ButtonHTMLAttributes, MouseEventHandler, useMemo } from 'react'
+import { className as cn } from '../../utils/hooks/classname'
 
 type IconType = 'presentational' | 'button' | 'link'
 type IconName = 'search' | 'close' | 'chevron_left'
@@ -67,7 +68,11 @@ const Icon: React.FC<IconProps> = ({ icon, size, className = '', ...props }) => 
     }, [props.type])
 
     return (
-        <Tag className={`material-symbols-outlined ${className}`} style={{ fontSize: size }} {...tagProps}>
+        <Tag
+            className={cn('material-symbols-outlined', styles.icon, className)}
+            style={{ fontSize: size }}
+            {...tagProps}
+        >
             {icon}
         </Tag>
     )

@@ -1,0 +1,26 @@
+@use "src/styles/variables" as *;
+@use "src/styles/functions" as *;
+
+.header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-items: center;
+    column-gap: $spacing-small;
+
+    padding: $spacing-small $spacing-mini;
+    background-color: colorOpaque($colors-primary, dd);
+
+    color: $colors-white;
+
+    .logo {
+        margin: 0;
+
+        font-size: $font-size-medium;
+
+        span {
+            font-size: $font-size-mini;
+            color: colorOpaque($colors-white, aa);
+        }
+    }
+}
