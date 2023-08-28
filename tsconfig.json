@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "src/routes/index.tsx", 
+    "pages/Bands"  
   ]
 }

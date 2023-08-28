@@ -17,6 +17,20 @@
         margin: 0;
 
         font-size: $font-size-medium;
+        text-decoration: none;
+
+        &:visited {
+            color: inherit;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover,
+        &:focus {
+            text-shadow: 1px 1px 2px $colors-white;
+        }
 
         span {
             font-size: $font-size-mini;

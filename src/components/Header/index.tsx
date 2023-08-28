@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Icon from '../Icon'
 import SearchBar from '../SearchBar'
 import styles from './Header.module.scss'
@@ -19,9 +20,9 @@ const Header: React.FC = () => {
             />
 
             <SearchBar outlined={false} label="Search Band" onSearch={handleSearch}></SearchBar>
-            <h1 className={styles.logo}>
+            <Link className={styles.logo} to="/">
                 isobar<span>.fm</span>
-            </h1>
+            </Link>
         </header>
     )
 }
