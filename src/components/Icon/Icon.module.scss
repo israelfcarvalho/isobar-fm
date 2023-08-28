@@ -1,3 +1,15 @@
 .material-symbols-outlined {
     color: inherit;
 }
+
+button {
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    outline: none;
+}
+
+button,
+a {
+    cursor: pointer;
+}
