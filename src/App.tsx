@@ -1,11 +1,9 @@
-import SearchBar from './components/SearchBar'
+import Header from './components/Header'
 
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <SearchBar label="Search band" onSearch={event => console.log(event)} />
-            </header>
+            <Header />
         </div>
     )
 }
