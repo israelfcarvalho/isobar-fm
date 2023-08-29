@@ -1,0 +1,37 @@
+@use "/src/styles/variables" as *;
+
+$image-dimension: 80px;
+
+.card {
+    display: grid;
+    grid-template-areas:
+        "image name"
+        "image plays";
+    grid-template-columns: $image-dimension 1fr;
+    grid-template-rows: calc($image-dimension / 2) calc($image-dimension / 2);
+    column-gap: $spacing-small;
+}
+
+.img {
+    grid-area: image;
+
+    width: 100%;
+    border-radius: $border-radius-circle;
+
+    object-fit: contain;
+}
+
+.name {
+    grid-area: name;
+    align-self: self-end;
+
+    color: $colors-gray;
+}
+
+.plays {
+    grid-area: plays;
+    align-self: self-start;
+
+    color: $colors-gray-light;
+    font-weight: $font-weight-bold;
+}

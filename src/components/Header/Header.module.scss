@@ -17,11 +17,6 @@
         margin: 0;
 
         font-size: $font-size-medium;
-        text-decoration: none;
-
-        &:visited {
-            color: inherit;
-        }
 
         &:focus {
             outline: none;

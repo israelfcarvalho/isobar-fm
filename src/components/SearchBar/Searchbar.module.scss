@@ -5,7 +5,7 @@
     max-width: 800px;
     width: 100%;
 
-    color: $colors-gray-light;
+    color: $colors-gray-lighter;
 
     .searchbar {
         width: 100%;
@@ -18,7 +18,7 @@
         }
 
         &--outlined {
-            border: 1px solid $colors-gray-light;
+            border: 1px solid $colors-gray-lighter;
             border-radius: $border-radius-smooth;
         }
 
