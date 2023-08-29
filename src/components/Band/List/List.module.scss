@@ -1,0 +1,22 @@
+@use "/src/styles/variables" as *;
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: $spacing-small;
+}
+
+@mixin band-card-position {
+    max-width: 100%;
+    margin: 0 $spacing-huge;
+}
+
+.band {
+    @include band-card-position;
+}
+
+.divider {
+    @include band-card-position;
+    height: 2px;
+    background-color: $colors-gray-lighter;
+}

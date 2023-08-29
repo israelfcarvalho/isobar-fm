@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+
 import { Band } from '../../../types/entities/band'
 import BandCard from '../Card'
-import axios from 'axios'
+import styles from './List.module.scss'
 
 const BandList: React.FC = () => {
     const [bands, setBands] = useState<Array<Band>>([])
@@ -15,11 +17,14 @@ const BandList: React.FC = () => {
     }, [])
 
     return (
-        <ul>
+        <ul className={styles.list}>
             {bands.map(band => (
-                <li key={band.id}>
-                    <BandCard band={band} />
-                </li>
+                <>
+                    <li className={styles.band} key={band.id}>
+                        <BandCard band={band} />
+                    </li>
+                    <div className={styles.divider} />
+                </>
             ))}
 
             {emptyList && <li key="empty_list">Sem resultados...</li>}
