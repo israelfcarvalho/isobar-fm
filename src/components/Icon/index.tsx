@@ -3,7 +3,7 @@ import React, { ButtonHTMLAttributes, MouseEventHandler, useMemo } from 'react'
 import { className as cn } from '../../utils/hooks/classname'
 
 type IconType = 'presentational' | 'button' | 'link'
-type IconName = 'search' | 'close' | 'chevron_left' | 'radio'
+type IconName = 'search' | 'close' | 'chevron_left' | 'radio' | 'music_note'
 
 interface IconPropsBase<IT extends IconType> {
     type: IT

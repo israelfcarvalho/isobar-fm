@@ -1,14 +1,25 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .list {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: $spacing-small;
+
+    padding: $spacing-small 0;
 }
 
 @mixin band-card-position {
     max-width: 100%;
     margin: 0 $spacing-huge;
+
+    @include device($breakpoint-tablet) {
+        margin: 0 $spacing-medium;
+    }
+
+    @include device($breakpoint-mobile) {
+        margin: 0;
+    }
 }
 
 .band {

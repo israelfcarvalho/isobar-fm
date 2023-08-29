@@ -5,6 +5,7 @@ import { Band } from '../../../types/entities/band'
 import BandCard from '../Card'
 import styles from './List.module.scss'
 import Icon from '../../Icon'
+import Loading from '../../Loading'
 
 const BandList: React.FC = () => {
     const [bandsFetched, setBandsFetched] = useState(false)
@@ -23,18 +24,27 @@ const BandList: React.FC = () => {
             })
     }, [])
 
+    const renderDivider = (index: number) => {
+        const show = index + 1 < bands.length
+        return show && <li className={styles.divider} />
+    }
+
     return (
         <>
-            <ul className={styles.list}>
-                {bands.map(band => (
-                    <>
-                        <li className={styles.band} key={band.id}>
-                            <BandCard band={band} />
-                        </li>
-                        <div className={styles.divider} />
-                    </>
-                ))}
-            </ul>
+            {bandsFetched ? (
+                <ul className={styles.list}>
+                    {bands.map((band, index) => (
+                        <>
+                            <li className={styles.band} key={band.id}>
+                                <BandCard band={band} />
+                            </li>
+                            {renderDivider(index)}
+                        </>
+                    ))}
+                </ul>
+            ) : (
+                <Loading />
+            )}
             {emptyList && (
                 <section className={styles.empty}>
                     <h1 className={styles.empty__title}>Sem resultados...</h1>
