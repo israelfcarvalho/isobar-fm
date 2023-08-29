@@ -20,3 +20,35 @@
     height: 2px;
     background-color: $colors-gray-lighter;
 }
+
+.empty {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: $colors-gray-light;
+
+    &__title {
+        font-weight: $font-weight-bold;
+    }
+
+    &__icon {
+        position: relative;
+        font-size: 200px;
+        transform: rotatey(180deg);
+
+        &::after {
+            content: ":(";
+            position: absolute;
+
+            top: 109px;
+            left: 118px;
+
+            font-size: 50px;
+            transform: rotateZ(90deg);
+        }
+    }
+}
