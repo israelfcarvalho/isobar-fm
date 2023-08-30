@@ -7,7 +7,7 @@ type Sortings = {
     [K in keyof Band]?: (bands: Array<Band>) => Array<Band>
 }
 
-const sortings: Sortings = {
+const sortingReducers: Sortings = {
     name: function (bands: Array<Band>) {
         return [...bands.sort((bandA, bandB) => bandA.name.localeCompare(bandB.name))]
     },
@@ -17,26 +17,61 @@ const sortings: Sortings = {
 }
 
 interface FetchBandsSuccessAction {
-    type: 'FetchBandsSuccess'
+    type: 'FETCH_BANDS_SUCCESS'
     bands: Array<Band>
 }
 
 interface SortBandsAction {
-    type: 'SortBands'
+    type: 'SORT_BANDS'
     sortBy: keyof Band
 }
 
-type BandsAction = FetchBandsSuccessAction | SortBandsAction
+interface FilterBandsAction {
+    type: 'FILTER_BANDS'
+    filter: string
+}
 
-function bandsReducer(state: Array<Band>, action: BandsAction) {
+type BandsAction = FetchBandsSuccessAction | SortBandsAction | FilterBandsAction
+
+interface BandsState {
+    untouchedBands: Array<Band>
+    bands: Array<Band>
+}
+
+const initialState: BandsState = {
+    bands: [],
+    untouchedBands: [],
+}
+
+function bandsReducer(state: BandsState, action: BandsAction): BandsState {
     switch (action.type) {
-        case 'FetchBandsSuccess': {
-            return action.bands
+        case 'FETCH_BANDS_SUCCESS': {
+            return {
+                ...state,
+                bands: action.bands,
+                untouchedBands: action.bands,
+            }
         }
 
-        case 'SortBands': {
-            const sort = sortings[action.sortBy]
-            return sort ? sort(state) : state
+        case 'SORT_BANDS': {
+            const sort = sortingReducers[action.sortBy]
+
+            if (!sort) {
+                return state
+            }
+
+            return {
+                ...state,
+                bands: sort(state.bands),
+                untouchedBands: sort(state.untouchedBands),
+            }
+        }
+
+        case 'FILTER_BANDS': {
+            return {
+                ...state,
+                bands: state.untouchedBands.filter(band => band.name.includes(action.filter)),
+            }
         }
 
         default: {
@@ -45,21 +80,27 @@ function bandsReducer(state: Array<Band>, action: BandsAction) {
     }
 }
 
-export function useBands(sortBy: keyof Band | undefined) {
-    const [bands, dispatch] = useReducer(bandsReducer, [])
+export function useBands(sortBy: keyof Band | undefined, filter: string | null) {
+    const [{ bands }, dispatch] = useReducer(bandsReducer, initialState)
     const [bandsFetched, setBandsFetched] = useState(false)
 
     useEffect(() => {
-        if (sortBy) {
-            dispatch({ type: 'SortBands', sortBy })
+        if (sortBy && bandsFetched) {
+            dispatch({ type: 'SORT_BANDS', sortBy })
         }
-    }, [sortBy])
+    }, [sortBy, bandsFetched])
+
+    useEffect(() => {
+        if (filter !== null && bandsFetched) {
+            dispatch({ type: 'FILTER_BANDS', filter })
+        }
+    }, [filter, bandsFetched])
 
     useEffect(() => {
         axios
             .get('https://dws-recruiting-bands.dwsbrazil.io/api/bands')
             .then(res => {
-                dispatch({ type: 'FetchBandsSuccess', bands: res.data })
+                dispatch({ type: 'FETCH_BANDS_SUCCESS', bands: res.data })
             })
             .finally(() => {
                 setBandsFetched(true)

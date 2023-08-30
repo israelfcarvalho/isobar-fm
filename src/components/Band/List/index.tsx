@@ -7,11 +7,14 @@ import Icon from '../../Icon'
 import Loading from '../../Loading'
 import BandListInfo from './Info'
 import { useBands } from './hooks'
+import { useSearchParams } from 'react-router-dom'
 
 const BandList: React.FC = () => {
-    const [sortBy, setSortBy] = useState<keyof Band>()
-    const { bands, bandsFetched } = useBands(sortBy)
+    const [searchParams] = useSearchParams()
+    const bandFilter = searchParams.get('bandFilter')
 
+    const [sortBy, setSortBy] = useState<keyof Band>()
+    const { bands, bandsFetched } = useBands(sortBy, bandFilter)
     const emptyList = !bands.length && bandsFetched
 
     const renderDivider = (index: number) => {

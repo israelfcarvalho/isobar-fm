@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../Icon'
 import SearchBar from '../SearchBar'
 import styles from './Header.module.scss'
@@ -10,8 +10,14 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ enableNavigateBack = false, fixed = false }) => {
+    const [, setSearchParams] = useSearchParams()
+
     const handleSearch = (search: string) => {
         console.log({ search })
+        setSearchParams(prev => {
+            prev.set('bandFilter', search)
+            return prev
+        })
     }
 
     return (
