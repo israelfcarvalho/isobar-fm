@@ -1,4 +1,5 @@
 @use "/src/styles/mixins" as *;
+@use "/src/styles/variables" as *;
 
 .page {
     display: flex;
@@ -15,5 +16,11 @@
 
     > * {
         max-width: $breakpoint-tablet;
+    }
+
+    a {
+        color: $colors-external-link;
+        font-weight: $font-weight-bold;
+        text-decoration: underline;
     }
 }

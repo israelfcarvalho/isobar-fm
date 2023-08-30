@@ -7,6 +7,7 @@ import Loading from '../../../components/Loading'
 import BandPoster from '../../../components/Band/Poster'
 import styles from './PageBand.module.scss'
 import { className } from '../../../utils/classname'
+import BandDescription from '../../../components/Band/Description'
 
 const PageBand: React.FC = () => {
     const [band, setBand] = useState<Band>()
@@ -35,7 +36,14 @@ const PageBand: React.FC = () => {
 
     return (
         <div className={className(styles.page, !band && styles['page--loading'])}>
-            {band ? <BandPoster band={band} /> : <Loading />}
+            {band ? (
+                <>
+                    <BandPoster band={band} />
+                    <BandDescription band={band} />
+                </>
+            ) : (
+                <Loading />
+            )}
         </div>
     )
 }

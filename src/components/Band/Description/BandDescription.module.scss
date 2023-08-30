@@ -1,0 +1,73 @@
+@use "/src/styles/variables" as *;
+
+.container {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 50px 1fr;
+    grid-template-areas:
+        "description description description"
+        "divider-left icon divider-right";
+
+    padding: $spacing-small;
+    width: 100%;
+}
+
+$description-max-height: var(--description-max-height);
+
+.description {
+    grid-area: description;
+
+    position: relative;
+    display: inline-block;
+
+    text-align: justify;
+    color: $colors-gray;
+
+    line-height: 1rem;
+    max-height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    transition: all 1s ease;
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -2rem;
+        left: -2rem;
+        box-shadow: 0 -2rem 2rem 1rem $colors-white inset;
+    }
+
+    &--showAll {
+        max-height: $description-max-height;
+
+        &:after {
+            top: 100%;
+        }
+    }
+}
+
+.divider {
+    height: 2px;
+    width: 100%;
+    background-color: $colors-gray-lighter;
+
+    align-self: center;
+
+    &__left {
+        grid-area: divider-left;
+    }
+
+    &__right {
+        grid-area: divider-right;
+    }
+}
+
+.icon {
+    grid-area: icon;
+    justify-self: center;
+
+    color: $colors-gray;
+}
