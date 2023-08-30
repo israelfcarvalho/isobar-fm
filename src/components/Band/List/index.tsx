@@ -1,20 +1,13 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
-import { Band } from '../../../types/entities/band'
 import BandCard from '../Card'
 import styles from './List.module.scss'
 import Icon from '../../Icon'
 import Loading from '../../Loading'
-import BandListInfo from './Info'
 import { useBands } from './hooks'
-import { useSearchParams } from 'react-router-dom'
 
 const BandList: React.FC = () => {
-    const [searchParams] = useSearchParams()
-    const bandFilter = searchParams.get('bandFilter')
-
-    const [sortBy, setSortBy] = useState<keyof Band>()
-    const { bands, bandsFetched } = useBands(sortBy, bandFilter)
+    const { bands, bandsFetched } = useBands()
     const emptyList = !bands.length && bandsFetched
 
     const renderDivider = (index: number) => {
@@ -26,7 +19,6 @@ const BandList: React.FC = () => {
         <>
             {bandsFetched ? (
                 <>
-                    <BandListInfo results={bands.length} onSelectSortOption={setSortBy} />
                     <ul className={styles.list}>
                         {bands.map((band, index) => (
                             <Fragment key={band.id}>

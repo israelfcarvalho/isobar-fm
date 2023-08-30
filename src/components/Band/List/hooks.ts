@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useReducer, useState } from 'react'
 import { Band } from '../../../types/entities/band'
+import { useSearchParams } from 'react-router-dom'
 
 type Sortings = {
     // eslint-disable-next-line no-unused-vars
@@ -70,7 +71,9 @@ function bandsReducer(state: BandsState, action: BandsAction): BandsState {
         case 'FILTER_BANDS': {
             return {
                 ...state,
-                bands: state.untouchedBands.filter(band => band.name.includes(action.filter)),
+                bands: state.untouchedBands.filter(band =>
+                    band.name.toLocaleLowerCase().includes(action.filter.toLocaleLowerCase())
+                ),
             }
         }
 
@@ -80,7 +83,11 @@ function bandsReducer(state: BandsState, action: BandsAction): BandsState {
     }
 }
 
-export function useBands(sortBy: keyof Band | undefined, filter: string | null) {
+export function useBands() {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const filter = searchParams.get('bandFilter')
+    const sortBy = searchParams.get('bandSort') as keyof Band
+
     const [{ bands }, dispatch] = useReducer(bandsReducer, initialState)
     const [bandsFetched, setBandsFetched] = useState(false)
 
@@ -106,6 +113,14 @@ export function useBands(sortBy: keyof Band | undefined, filter: string | null) 
                 setBandsFetched(true)
             })
     }, [])
+
+    useEffect(() => {
+        setSearchParams(prevSearch => {
+            prevSearch.set('bandResults', bands.length.toString())
+
+            return prevSearch
+        })
+    }, [bands.length, setSearchParams])
 
     return {
         bands,
