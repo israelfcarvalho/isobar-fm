@@ -1,0 +1,19 @@
+@use "/src/styles/mixins" as *;
+
+.page {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    width: 100%;
+    min-height: 100%;
+
+    &--loading {
+        justify-content: center;
+    }
+
+    > * {
+        max-width: $breakpoint-tablet;
+    }
+}
