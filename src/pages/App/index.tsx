@@ -5,8 +5,8 @@ import styles from './App.module.scss'
 const PageApp: React.FC = () => {
     return (
         <div className={styles.page} id="app-page">
-            <Header />
-            <div id="app-page-content">
+            <Header fixed />
+            <div className={styles.content} id="app-page-content">
                 <Outlet />
             </div>
         </div>

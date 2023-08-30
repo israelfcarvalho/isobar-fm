@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { className } from '../../utils/hooks/classname'
+import { className } from '../../utils/classname'
 import Icon from '../Icon'
 import styles from './Searchbar.module.scss'
 

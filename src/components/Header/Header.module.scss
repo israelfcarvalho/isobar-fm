@@ -13,7 +13,13 @@
 
     color: $colors-white;
 
-    &__backNavigation {
+    &--fixed {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    &--backNavigation {
         grid-template-columns: auto 1fr auto;
     }
 

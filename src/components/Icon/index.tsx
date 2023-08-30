@@ -1,9 +1,9 @@
 import styles from './Icon.module.scss'
 import React, { ButtonHTMLAttributes, MouseEventHandler, useMemo } from 'react'
-import { className as cn } from '../../utils/hooks/classname'
+import { className as cn } from '../../utils/classname'
 
 type IconType = 'presentational' | 'button' | 'link'
-type IconName = 'search' | 'close' | 'chevron_left' | 'radio' | 'music_note'
+type IconName = 'search' | 'close' | 'chevron_left' | 'radio' | 'music_note' | 'sync_alt'
 
 interface IconPropsBase<IT extends IconType> {
     type: IT
