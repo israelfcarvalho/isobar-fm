@@ -1,0 +1,52 @@
+@use "/src/styles/variables" as *;
+
+.info {
+    position: relative;
+
+    width: 100%;
+    background-color: $colors-gray-dark;
+
+    color: $colors-white;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    &__results {
+        padding: $spacing-mini;
+        padding-left: $spacing-large;
+        background-color: $colors-gray-lighter;
+
+        color: $colors-gray;
+        font-size: $font-size-medium;
+    }
+
+    &__sort {
+        padding: $spacing-mini;
+
+        width: 44px;
+        height: 44px;
+
+        transform: rotateZ(90deg);
+        line-height: normal;
+    }
+
+    &__sortOptions {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transform: translateY(100%);
+
+        display: flex;
+        flex-flow: column;
+        flex-wrap: nowrap;
+
+        button {
+            width: 100%;
+            padding: $spacing-small;
+            background-color: $colors-gray;
+
+            text-align: right;
+            color: $colors-white;
+        }
+    }
+}
