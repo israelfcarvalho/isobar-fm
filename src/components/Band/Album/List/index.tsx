@@ -1,6 +1,6 @@
 import { Band } from '../../../../types/entities/band'
 import AlbumCard from '../Card'
-import styles from './BandAlbums.module.scss'
+import styles from './BandAlbumList.module.scss'
 
 interface BandAlbumListProps {
     band: Band
