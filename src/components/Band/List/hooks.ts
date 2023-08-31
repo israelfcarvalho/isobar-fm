@@ -1,7 +1,7 @@
-import axios from 'axios'
 import { useEffect, useReducer, useState } from 'react'
 import { Band } from '../../../types/entities/band'
 import { useSearchParams } from 'react-router-dom'
+import api from '../../../services/api'
 
 type Sortings = {
     // eslint-disable-next-line no-unused-vars
@@ -104,8 +104,7 @@ export function useBands() {
     }, [filter, bandsFetched])
 
     useEffect(() => {
-        axios
-            .get('https://dws-recruiting-bands.dwsbrazil.io/api/bands')
+        api.get('bands')
             .then(res => {
                 dispatch({ type: 'FETCH_BANDS_SUCCESS', bands: res.data })
             })

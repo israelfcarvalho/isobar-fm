@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Band } from '../../../types/entities/band'
@@ -9,6 +8,7 @@ import styles from './PageBand.module.scss'
 import { className } from '../../../utils/classname'
 import BandDescription from '../../../components/Band/Description'
 import BandAlbuns from '../../../components/Band/Album/List'
+import api from '../../../services/api'
 
 const PageBand: React.FC = () => {
     const [band, setBand] = useState<Band>()
@@ -20,8 +20,7 @@ const PageBand: React.FC = () => {
             navigate('/bands', { replace: true })
         }
 
-        axios
-            .get(`https://dws-recruiting-bands.dwsbrazil.io/api/bands/${bandId}`)
+        api.get(`bands/${bandId}`)
             .then(res => {
                 if (res.data) {
                     setBand(res.data)
