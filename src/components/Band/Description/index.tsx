@@ -29,7 +29,13 @@ const BandDescription: React.FC<BandDescriptionProps> = ({ band }) => {
                 dangerouslySetInnerHTML={{ __html: band.biography }}
             ></p>
             <div className={className(styles.divider, styles.divider__left)}></div>
-            <Icon className={styles.icon} type="button" icon={showAll ? 'remove' : 'add'} onClick={toggleShowAll} />
+            <Icon
+                ariaLabel={showAll ? 'Esconder descrição completa!' : 'Ver descrição completa!'}
+                className={styles.icon}
+                type="button"
+                icon={showAll ? 'remove' : 'add'}
+                onClick={toggleShowAll}
+            />
             <div className={className(styles.divider, styles.divider__right)}></div>
         </section>
     )
