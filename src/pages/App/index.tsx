@@ -7,7 +7,7 @@ const PageApp: React.FC = () => {
 
     return (
         <div className={styles.page} id="app-page">
-            <Header fixed hideBandListInfo={!!pageBandMatch} enableNavigateBack={!!pageBandMatch} />
+            <Header fixed type={pageBandMatch ? 'band' : 'full'} enableNavigateBack={!!pageBandMatch} />
             <div className={styles.content} id="app-page-content">
                 <Outlet />
             </div>

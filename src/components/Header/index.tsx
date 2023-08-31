@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Icon from '../Icon'
 import SearchBar from '../SearchBar'
 import styles from './Header.module.scss'
@@ -7,13 +7,15 @@ import BandListInfo from '../Band/List/Info'
 import { useCallback } from 'react'
 import { Band } from '../../types/entities/band'
 
+type HeaderTypes = 'full' | 'band'
+
 interface HeaderProps {
     enableNavigateBack?: boolean
     fixed?: boolean
-    hideBandListInfo?: boolean
+    type?: HeaderTypes
 }
 
-const Header: React.FC<HeaderProps> = ({ enableNavigateBack = false, fixed = false, hideBandListInfo = false }) => {
+const Header: React.FC<HeaderProps> = ({ enableNavigateBack = false, fixed = false, type = 'full' }) => {
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
     const bandResults = Number(searchParams.get('bandResults')) || 0
@@ -40,24 +42,36 @@ const Header: React.FC<HeaderProps> = ({ enableNavigateBack = false, fixed = fal
 
     return (
         <section className={className(styles.container, fixed && styles['container--fixed'])}>
-            <header className={className(styles.header, enableNavigateBack && styles['header--backNavigation'])}>
+            <header
+                className={className(
+                    styles.header,
+                    styles[type],
+                    enableNavigateBack && styles[`${type}--backNavigation`]
+                )}
+            >
                 {enableNavigateBack && (
-                    <Icon icon="chevron_left" type="button" ariaLabel="Go back" onClick={() => navigate(-1)} />
+                    <Icon
+                        className={styles.icon}
+                        icon="chevron_left"
+                        type="button"
+                        ariaLabel="Go back"
+                        onClick={() => navigate(-1)}
+                    />
                 )}
 
-                <SearchBar
-                    outlined={false}
-                    label="Search Band"
-                    onSearch={handleSearch}
-                    initialTerm={searchParams.get('bandFilter') || ''}
-                ></SearchBar>
+                {type === 'full' && (
+                    <SearchBar
+                        outlined={false}
+                        label="Search Band"
+                        onSearch={handleSearch}
+                        initialTerm={searchParams.get('bandFilter') || ''}
+                    ></SearchBar>
+                )}
                 <h1 className={styles.logo}>
-                    <Link to="/">
-                        isobar<span>.fm</span>
-                    </Link>
+                    isobar<span>.fm</span>
                 </h1>
             </header>
-            {!hideBandListInfo && <BandListInfo results={bandResults} onSelectSortOption={handleSelectSortOption} />}
+            {type === 'full' && <BandListInfo results={bandResults} onSelectSortOption={handleSelectSortOption} />}
         </section>
     )
 }

@@ -8,6 +8,7 @@ import BandPoster from '../../../components/Band/Poster'
 import styles from './PageBand.module.scss'
 import { className } from '../../../utils/classname'
 import BandDescription from '../../../components/Band/Description'
+import BandAlbuns from '../../../components/Band/Album/List'
 
 const PageBand: React.FC = () => {
     const [band, setBand] = useState<Band>()
@@ -40,6 +41,7 @@ const PageBand: React.FC = () => {
                 <>
                     <BandPoster band={band} />
                     <BandDescription band={band} />
+                    <BandAlbuns band={band} />
                 </>
             ) : (
                 <Loading />

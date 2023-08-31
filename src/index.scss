@@ -1,9 +1,12 @@
+@use "/src/styles/variables" as *;
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  background-color: $colors-white;
 }
 
 p,
