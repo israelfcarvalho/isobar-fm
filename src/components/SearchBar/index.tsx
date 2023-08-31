@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useMemo, useState } from 'react'
 import { className } from '../../utils/classname'
 import Icon from '../Icon'
 import styles from './Searchbar.module.scss'
+import { debounce } from '../../services/helpers'
 
 interface SearchBarProps {
     label: string
@@ -15,8 +16,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialTerm = '', label, placehol
     const [focused, setFocused] = useState(false)
     const [term, setTerm] = useState(initialTerm)
 
+    const searchOnChange = useMemo(() => debounce(onSearch, 500), [onSearch])
+
     const handleChangeTerm = (event: ChangeEvent<HTMLInputElement>) => {
         setTerm(event.target.value)
+
+        searchOnChange(event.target.value)
     }
 
     const handleFocus = () => {
