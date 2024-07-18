@@ -22,6 +22,7 @@
   },
   "include": [
     "src",
-    "src/routes/index.tsx", 
-  ]
+    "src/routes/index.tsx",
+    "cypress/support/component.ts"
+  ],
 }
